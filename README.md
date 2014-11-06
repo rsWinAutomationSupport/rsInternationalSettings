@@ -33,7 +33,7 @@ Use the `tzutil /l` command to list all possible options.
 
 *$InputLocaleID* - Locale ID as defined by Microsoft. Used in combination with LCIDHex, see [Keyboard Language & Locale IDs Assigned by Microsoft](http://msdn.microsoft.com/en-gb/goglobal/bb895996.aspx)
 
-**Keyboard options tip:** To easily identify correct settings for user keyboard options (*LCIDHex* & *InputLocaleID*), set the desired keyboard settings on a Windows 8/2012, or later, machine and run the following PS command `Get-WinUserLanguageList`. This will provide the keyboard settings for current user. Property named "InputMethodTips" will provide the correct Language Code ID as `{<LCIDHex>:<InputLocaleID>}`.
+**Keyboard options tip:** To easily identify correct settings for user keyboard options (*LCIDHex* & *InputLocaleID*), set the desired keyboard settings on a Windows 8/2012, or later, machine and run the following PS command `Get-WinUserLanguageList`. Property named "InputMethodTips" will provide the correct Language Code ID as `{<LCIDHex>:<InputLocaleID>}`.
 
 Example:
 

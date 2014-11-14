@@ -1,6 +1,6 @@
 
-[ClassVersion("1.0"), FriendlyName("rsTimeZone")]
-class RS_rsTimeZone : OMI_BaseResource
+[ClassVersion("1.0"), FriendlyName("rsTime")]
+class RS_rsTime : OMI_BaseResource
 {
 	[Key, Description("Provide desired system TZ (execute tzutil /l to see full list of possible options)")] String TimeZone;
 };

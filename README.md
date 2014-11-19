@@ -33,7 +33,8 @@ This will force all system and user settings to US codepage, including input set
     
     rsUserLocale UserLocale
     {
-    	Culture = "en-US"
+    	Name = "UserLocale"
+		Culture = "en-US"
     	LocationID = "244"
     	LCIDHex = "0409"
     	InputLocaleID = "00000409"
@@ -56,7 +57,8 @@ This will force all system and user settings to UK codepage, including input set
     
     rsUserLocale UserLocale
     {
-    	Culture = "en-GB"
+    	Name = "UserLocale"
+		Culture = "en-GB"
     	LocationID = "242"
     	LCIDHex = "0809"
     	InputLocaleID = "00000809"

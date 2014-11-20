@@ -79,7 +79,7 @@ System time zone name description. Ex "GMT Standard Time"
 Use the `tzutil /l` command to list all possible options.
 
 #####$LocationID
-Geographical System location ID (GEOID). Refer to [Table of Geographical Locations](http://msdn.microsoft.com/en-us/library/dd374073.asp) for full list of possible options.
+Geographical System location ID (GEOID). Refer to [Table of Geographical Locations](http://msdn.microsoft.com/en-us/library/windows/desktop/dd374073(v=vs.85).aspx) for full list of possible options.
 
 #####$LCIDHex
 Keyboard Language ID as defined by Microsoft. Used in combination with InputLocaleID, see [Keyboard Language & Locale IDs Assigned by Microsoft](http://msdn.microsoft.com/en-gb/goglobal/bb895996.aspx)

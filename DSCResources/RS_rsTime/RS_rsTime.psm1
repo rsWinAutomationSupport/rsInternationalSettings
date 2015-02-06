@@ -22,10 +22,11 @@ function Get-TargetResource
         Write-Verbose "Current manual peer list setting is: $CurrentPeers"
     }
 
-	@{
+	$returnValue = @{
 		TimeZone = $CurrentTZ
         PeerList = $CurrentPeers
 	}
+    $returnValue
 }
 
 
@@ -54,13 +55,20 @@ function Set-TargetResource
         if ($PeerList)
         {
             [array]$PeerList = $PeerList.Split()
+            $wmiW32Time = (Get-CimInstance -ClassName win32_service | Where-Object {$_.Name -eq "W32Time"})
+
+            # Check if W32Time service was unregistered, but not stopped
+            if (($wmiW32Time.startmode -eq "Disabled") -and ($wmiW32Time.State -eq "Running"))
+            {
+                Write-Verbose "Windows Time service might have been unregistered, but not stopped... Stopping now..."
+                Stop-Service w32time -ErrorAction SilentlyContinue
+            }
             
             # Check if w32time service is not registered
             if (-not [bool](Get-Service w32time -ErrorAction SilentlyContinue))
             {
                 Write-Verbose "Registering and starting Windows Time service"
                 Invoke-Command {w32tm /register}
-                Start-Service w32time
             }
             
             if ((Get-Service w32time).Status -ne "Running")
@@ -68,9 +76,9 @@ function Set-TargetResource
                 Write-Verbose "Starting Windows Times service"
                 Start-Service w32Time
             }
-
-            $w32TimeMode = (Get-CimInstance -ClassName win32_service -Property startmode, name | Where-Object {$_.Name -eq "W32Time"} | select startmode).Startmode
-            if ($w32TimeMode -ne "Auto")
+            
+            $wmiW32Time = (Get-CimInstance -ClassName win32_service | Where-Object {$_.Name -eq "W32Time"})
+            if ($wmiW32Time.Startmode -ne "Auto")
             {
                 Set-Service w32Time -StartupType "Automatic"
             }
@@ -95,7 +103,7 @@ function Set-TargetResource
     }
     catch
     {
-        
+
     }
 }
 
@@ -121,8 +129,6 @@ function Test-TargetResource
         {
             if ($PeerList)
             {
-                [array]$PeerList = $PeerList.Split()
-
                 # Check if w32time service is registered, running and set to auto-start
                 if ([bool](Get-Service w32time -ErrorAction SilentlyContinue))
                 {
@@ -145,8 +151,7 @@ function Test-TargetResource
                     return $false
                 }
                 
-                # Check if configured peer list matches DSC setting
-                if ([bool](Compare-Object $CurrentSetting.PeerList $PeerList))
+                if ([bool](Compare-Object $CurrentSetting.PeerList $PeerList.Split() ))
                 {
                     Write-Verbose "Current manual peer list does not match DSC settings"
                     return $false
@@ -160,6 +165,7 @@ function Test-TargetResource
                     return $false
                 }
             }
+
             Write-Verbose "Timezone settings are consistent"
             return $true
         }

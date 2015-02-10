@@ -7,7 +7,7 @@ function Get-TargetResource
 		[parameter(Mandatory = $true)]
 		[System.String]
 		$TimeZone,
-		[string]
+		[string[]]
 		$PeerList
 	)
 
@@ -38,7 +38,7 @@ function Set-TargetResource
 		[parameter(Mandatory = $true)]
 		[System.String]
 		$TimeZone,
-		[string]
+		[string[]]
 		$PeerList
 	)
 
@@ -54,7 +54,7 @@ function Set-TargetResource
 
         if ($PeerList)
         {
-            [array]$PeerList = $PeerList.Split()
+            #[array]$PeerList = $PeerList.Split()
             $wmiW32Time = (Get-CimInstance -ClassName win32_service | Where-Object {$_.Name -eq "W32Time"})
 
             # Check if W32Time service was unregistered, but not stopped
@@ -117,7 +117,7 @@ function Test-TargetResource
 		[parameter(Mandatory = $true)]
 		[System.String]
 		$TimeZone,
-		[string]
+		[string[]]
 		$PeerList
 	)
 

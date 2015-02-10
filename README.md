@@ -71,7 +71,7 @@ To override the default time.windows.com NTP server or the automatic AD member t
     rsTime time
     {
     	TimeZone = "GMT Standard Time"
-		PeerList = "0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org"
+	PeerList = @("0.pool.ntp.org","1.pool.ntp.org","2.pool.ntp.org")
     }
 
 ###Acceptable parameter values
@@ -87,7 +87,7 @@ System time zone name description. Ex "GMT Standard Time"
 Use the `tzutil /l` command to list all possible options.
 
 #####$PeerList
-Space-separated list of NTP servers to configure the local Windows Time service.
+An array of NTP servers to configure the local Windows Time service.
 
 #####$LocationID
 Geographical System location ID (GEOID). Refer to [Table of Geographical Locations](http://msdn.microsoft.com/en-us/library/windows/desktop/dd374073(v=vs.85).aspx) for full list of possible options.

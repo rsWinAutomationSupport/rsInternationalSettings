@@ -5,7 +5,9 @@ rsInternationalSettings DSC Module
 
 ##Changelog
 
-######v0.0.1
+######v0.2
+Added support for setting manual peer list for NTP servers in rsTime using the PeerList variable
+######v0.1
 Added support for setting time zone, culture, system local and all local (including default) user profile settings.
 
 ####To-do:
@@ -70,8 +72,8 @@ To override the default time.windows.com NTP server or the automatic AD member t
 
     rsTime time
     {
-    	TimeZone = "GMT Standard Time"
-	PeerList = @("0.pool.ntp.org","1.pool.ntp.org","2.pool.ntp.org")
+        TimeZone = "GMT Standard Time"
+        PeerList = @("0.pool.ntp.org","1.pool.ntp.org","2.pool.ntp.org")
     }
 
 ###Acceptable parameter values

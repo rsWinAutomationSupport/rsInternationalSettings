@@ -5,7 +5,9 @@ rsInternationalSettings DSC Module
 
 ##Changelog
 
-######v0.0.1
+######v0.2
+Added support for setting manual peer list for NTP servers in rsTime using the PeerList variable
+######v0.1
 Added support for setting time zone, culture, system local and all local (including default) user profile settings.
 
 ####To-do:
@@ -64,7 +66,15 @@ This will force all system and user settings to UK codepage, including input set
     	InputLocaleID = "00000809"
     }
 
+**Add manual NTP peer server list**
 
+To override the default time.windows.com NTP server or the automatic AD member time synchronisation, you can specify the PeerList parameter for rsTime, which will register the Windows Time service and configure it accordingly. Please note that omitting this parameter will always result in Windows Time Service to be unregistered if one is running already.
+
+    rsTime time
+    {
+        TimeZone = "GMT Standard Time"
+        PeerList = @("0.pool.ntp.org","1.pool.ntp.org","2.pool.ntp.org")
+    }
 
 ###Acceptable parameter values
 
@@ -77,6 +87,9 @@ Use the following PowerShell command to list all available options:
 #####$TimeZone
 System time zone name description. Ex "GMT Standard Time"
 Use the `tzutil /l` command to list all possible options.
+
+#####$PeerList
+An array of NTP servers to configure the local Windows Time service.
 
 #####$LocationID
 Geographical System location ID (GEOID). Refer to [Table of Geographical Locations](http://msdn.microsoft.com/en-us/library/windows/desktop/dd374073(v=vs.85).aspx) for full list of possible options.

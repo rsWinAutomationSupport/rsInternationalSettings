@@ -5,13 +5,10 @@ rsInternationalSettings DSC Module
 
 ##Changelog
 
-######v0.2
+######2.2.0
 Added support for setting manual peer list for NTP servers in rsTime using the PeerList variable
-######v0.1
+######2.1.0
 Added support for setting time zone, culture, system local and all local (including default) user profile settings.
-
-####To-do:
-Add support for provision of an optional time server parameter
 
 ##Syntax##
 
